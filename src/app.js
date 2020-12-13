@@ -27,6 +27,9 @@ app.get('/strings/first-characters/:word', (req, res) => {
     n = req.query.length;
   }
   res.json({result: firstCharacters(req.params.word, n)});
+  
+  //Advanced:
+  // res.json({result: firstCharacters(req.params.word, req.query?.length || 1)});
 });
 
 module.exports = app;
