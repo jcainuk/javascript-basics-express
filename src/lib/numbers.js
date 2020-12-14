@@ -1,5 +1,5 @@
 const add = (a, b) => {
-  return parseInt(a) + parseInt(b);
+  return a + b;
 };
 
 const subtract = (a, b) => {

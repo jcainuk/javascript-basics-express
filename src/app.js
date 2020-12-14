@@ -33,8 +33,11 @@ app.get('/strings/first-characters/:word', (req, res) => {
   // res.json({result: firstCharacters(req.params.word, req.query?.length || 1)});
 });
 
-app.get('/numbers/add/:1/and/:2', (req, res)=> {
-  res.json({result: add(req.params[1], req.params[2])});
+app.get('/numbers/add/:a/and/:b', (req, res) => {
+  const a = parseInt(req.params.a);
+  const b = parseInt(req.params.b);
+
+  res.status(200).json({ result: add(a, b) });
 });
 
 module.exports = app;
