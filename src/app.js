@@ -1,4 +1,5 @@
 const express = require('express');
+const { add } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 
 const app = express();
@@ -30,6 +31,10 @@ app.get('/strings/first-characters/:word', (req, res) => {
   
   //Advanced:
   // res.json({result: firstCharacters(req.params.word, req.query?.length || 1)});
+});
+
+app.get('/numbers/add/:1/and/:2', (req, res)=> {
+  res.json({result: add(req.params[1], req.params[2])});
 });
 
 module.exports = app;
