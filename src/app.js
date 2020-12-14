@@ -38,7 +38,7 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
   const b = parseInt(req.params.b, 10);
 
   if (Number.isNaN(a) ||Number.isNaN(b))  {
-    res.sendStatus(400);
+    res.status(400).json({error: 'Parameters must be valid numbers.'});
   }
   res.status(200).json({result: add(a, b) });
 });
