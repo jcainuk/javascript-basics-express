@@ -34,10 +34,13 @@ app.get('/strings/first-characters/:word', (req, res) => {
 });
 
 app.get('/numbers/add/:a/and/:b', (req, res) => {
-  const a = parseInt(req.params.a);
-  const b = parseInt(req.params.b);
+  const a = parseInt(req.params.a, 10);
+  const b = parseInt(req.params.b, 10);
 
-  res.status(200).json({ result: add(a, b) });
+  if (Number.isNaN(a) ||Number.isNaN(b))  {
+    res.sendStatus(400);
+  }
+  res.status(200).json({result: add(a, b) });
 });
 
 module.exports = app;
