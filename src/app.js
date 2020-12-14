@@ -1,8 +1,10 @@
 const express = require('express');
-const { add } = require('./lib/numbers');
+const { add, subtract } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 
 const app = express();
+
+app.use(express.json());
 
 app.get('/strings/hello/:id', (req, res) => {
   // const name = req.params.id; //id is the wildcard defined in the path
@@ -23,7 +25,7 @@ app.get('/strings/lower/:word', (req,res) => {
 
 app.get('/strings/first-characters/:word', (req, res) => {
   let n = 1;
-  console.log(req.query);
+  // console.log(req.query);
   if ('length' in req.query) {
     n = req.query.length;
   }
@@ -37,10 +39,23 @@ app.get('/numbers/add/:a/and/:b', (req, res) => {
   const a = parseInt(req.params.a, 10);
   const b = parseInt(req.params.b, 10);
 
-  if (Number.isNaN(a) ||Number.isNaN(b))  {
+  if (Number.isNaN(a) || Number.isNaN(b))  {
     res.status(400).json({error: 'Parameters must be valid numbers.'});
   }
   res.status(200).json({result: add(a, b) });
+});
+
+app.get('/numbers/subtract/:a/from/:b', (req, res) => {
+  const a = parseInt(req.params.a, 10);
+  const b = parseInt(req.params.b, 10);
+
+  console.log(a);
+  console.log(b);
+
+  if (Number.isNaN(a) || Number.isNaN(b))  {
+    res.status(400).json({error: 'Parameters must be valid numbers.'});
+  }
+  res.status(200).json({result: subtract(b, a) });
 });
 
 module.exports = app;
