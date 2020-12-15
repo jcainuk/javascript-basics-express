@@ -2,7 +2,7 @@ const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
-const { getNthElement, arrayToCSVString } = require('./lib/arrays');
+const { getNthElement, arrayToCSVString, addToArray2 } = require('./lib/arrays');
 
 const app = express();
 
@@ -140,6 +140,16 @@ app.post('/arrays/element-at-index/:index/', (req, res) =>{
 app.post('/arrays/to-string', (req, res) => {
   res.status(200).send({ result: arrayToCSVString(req.body.array) });
 
+});
+
+app.post('/arrays/append/', (req, res) => {
+/*Here 'addToArray' (push) would have updated the array you 
+pass an argument directly but you would be using
+it in your route/controller as if it were returning the expected 
+array so use addToArray2 (concat) ? */
+
+res.status(200).send({ result: addToArray2(req.body.value, req.body.array) });
+  
 });
 
 
