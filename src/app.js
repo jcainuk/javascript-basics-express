@@ -2,7 +2,7 @@ const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
-const { getNthElement, arrayToCSVString, addToArray2, elementsStartingWithAVowel } = require('./lib/arrays');
+const { getNthElement, arrayToCSVString, addToArray2, elementsStartingWithAVowel, removeNthElement2 } = require('./lib/arrays');
 
 const app = express();
 
@@ -156,5 +156,13 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
   res.status(200).send({ result: elementsStartingWithAVowel(req.body.array) });
 
 });
+
+app.post('/arrays/remove-element/?index={index}', (req, res) => {
+//????
+  res.status(200).send({ result: removeNthElement2(req.params.index, req.body.array) });
+
+});
+
+
 
 module.exports = app;
