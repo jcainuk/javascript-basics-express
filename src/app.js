@@ -1,7 +1,7 @@
 const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
-const { negate, truthiness } = require('./lib/booleans');
+const { negate, truthiness, isOdd } = require('./lib/booleans');
 
 const app = express();
 
@@ -112,6 +112,15 @@ app.post('/booleans/negate/', (req, res) => {
 app.post('/booleans/truthiness', (req, res) => {
   res.status(200).send({ result: truthiness(req.body.value) });
 
+});
+
+app.get('/booleans/is-odd/:id', (req, res) => {
+  if (isNaN(req.params.id))  {
+    res.status(400).send({ error: 'Parameter must be a number.'});
+  }
+  else {
+    res.status(200).send({ result: isOdd(req.params.id)});
+}
 });
 
 module.exports = app;
