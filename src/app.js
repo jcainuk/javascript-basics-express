@@ -2,6 +2,7 @@ const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
+const { getNthElement } = require('./lib/arrays');
 
 const app = express();
 
@@ -124,12 +125,17 @@ app.get('/booleans/is-odd/:id', (req, res) => {
 });
 
 app.get('/booleans/:string/starts-with/:char', (req, res) => {
-if (req.params.char.length > 1){
-  res.status(400).send({ error: 'Parameter "character" must be a single character.'});
+if (req.params.char.length === 1){
+  res.status(200).send({ result: startsWith(req.params.char, req.params.string)});
   }
 else {
-res.status(200).send({ result: startsWith(req.params.char, req.params.string)});
+  res.status(400).send({ error: 'Parameter "character" must be a single character.'});
 }
 });
+
+app.post('/arrays/element-at-index/:index/', (req, res) =>{
+  res.status(200).send({ result: getNthElement(req.params.index, req.body.array) });
+});
+
 
 module.exports = app;
