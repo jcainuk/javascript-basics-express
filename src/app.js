@@ -2,7 +2,7 @@ const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
 const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
-const { getNthElement } = require('./lib/arrays');
+const { getNthElement, arrayToCSVString } = require('./lib/arrays');
 
 const app = express();
 
@@ -135,6 +135,11 @@ else {
 
 app.post('/arrays/element-at-index/:index/', (req, res) =>{
   res.status(200).send({ result: getNthElement(req.params.index, req.body.array) });
+});
+
+app.post('/arrays/to-string', (req, res) => {
+  res.status(200).send({ result: arrayToCSVString(req.body.array) });
+
 });
 
 
