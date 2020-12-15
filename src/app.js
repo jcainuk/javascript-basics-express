@@ -1,7 +1,7 @@
 const express = require('express');
 const { add, subtract, multiply, divide, remainder } = require('./lib/numbers');
 const { sayHello, uppercase, lowercase, firstCharacters } = require('./lib/strings');
-const { negate, truthiness, isOdd } = require('./lib/booleans');
+const { negate, truthiness, isOdd, startsWith } = require('./lib/booleans');
 
 const app = express();
 
@@ -120,6 +120,15 @@ app.get('/booleans/is-odd/:id', (req, res) => {
   }
   else {
     res.status(200).send({ result: isOdd(req.params.id)});
+}
+});
+
+app.get('/booleans/:string/starts-with/:char', (req, res) => {
+if (req.params.char.length > 1){
+  res.status(400).send({ error: 'Parameter "character" must be a single character.'});
+  }
+else {
+res.status(200).send({ result: startsWith(req.params.char, req.params.string)});
 }
 });
 
