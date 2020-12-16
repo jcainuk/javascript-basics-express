@@ -157,9 +157,8 @@ app.post('/arrays/starts-with-vowel', (req, res) => {
 
 });
 
-app.post('/arrays/remove-element/?index={index}', (req, res) => {
-//????
-  res.status(200).send({ result: removeNthElement2(req.params.index, req.body.array) });
+app.post('/arrays/remove-element', (req, res) => {
+  res.status(200).send({ result: removeNthElement2(req.query.index, req.body.array) });
 
 });
 
